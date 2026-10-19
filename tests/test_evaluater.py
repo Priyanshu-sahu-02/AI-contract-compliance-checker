@@ -21,7 +21,7 @@ chunks = search_similar_chunks(
     k=3,
 )
 
-print("Evaluating policy with Ollama...")
+print("Evaluating policy with Groq...")
 
 result = evaluate_policy(
     policy=policy,
@@ -32,3 +32,14 @@ result = evaluate_policy(
 print("\n--- COMPLIANCE RESULT ---")
 for key, value in result.items():
     print(f"\n{key.upper()}:\n{value}")
+
+
+def test_empty_evidence_returns_needs_review():
+    result = evaluate_policy(
+        policy="Customer data must be encrypted.",
+        retrieved_chunks=[],
+    )
+
+    assert result["status"] == "Needs review"
+    assert result["evidence"] == "No evidence available."
+

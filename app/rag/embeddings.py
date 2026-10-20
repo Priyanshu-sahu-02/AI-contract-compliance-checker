@@ -12,9 +12,18 @@ def get_embedding_model():
         )
     return _model
 
+
 def generate_embeddings(texts: list[str]) -> list[list[float]]:
+    print(f"[EMBEDDINGS] Starting generation for {len(texts)} chunks", flush=True)
+
     model = get_embedding_model()
-    return model.embed_documents(texts)
+    print("[EMBEDDINGS] Model loaded; generating vectors...", flush=True)
+
+    vectors = model.embed_documents(texts)
+
+    print(f"[EMBEDDINGS] Generated {len(vectors)} vectors", flush=True)
+    return vectors
+
 
 def generate_query_embedding(text: str) -> list[float]:
     model = get_embedding_model()

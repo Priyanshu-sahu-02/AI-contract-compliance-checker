@@ -14,14 +14,20 @@ def get_embedding_model():
 
 
 def generate_embeddings(texts: list[str]) -> list[list[float]]:
-    print(f"[EMBEDDINGS] Starting generation for {len(texts)} chunks", flush=True)
+    print(
+        f"[EMBEDDINGS] Starting: {len(texts)} chunks",
+        flush=True,
+    )
 
     model = get_embedding_model()
-    print("[EMBEDDINGS] Model loaded; generating vectors...", flush=True)
+    print("[EMBEDDINGS] Model loaded", flush=True)
 
     vectors = model.embed_documents(texts)
+    print(
+        f"[EMBEDDINGS] Generated {len(vectors)} vectors",
+        flush=True,
+    )
 
-    print(f"[EMBEDDINGS] Generated {len(vectors)} vectors", flush=True)
     return vectors
 
 
